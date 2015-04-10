@@ -10,7 +10,6 @@
   "author": "Yura Trambitskiy",
   "license": "MIT",
   "devDependencies": {
-    "element-size": "^1.1.1",
     "emmy": "^5.2.0",
     "mucss": "^0.5.9",
     "queried": "^1.4.1",
