@@ -1,8 +1,6 @@
 var extend = require('xtend/mutable'),
 	css = require('mucss/css'),
-	getPaddings = require('mucss/paddings'),
-	getMargins = require('mucss/margins'),
-	getBorders = require('mucss/borders');
+	getMargins = require('mucss/margins');
 
 function Cascade(element, options) {
 
@@ -31,7 +29,10 @@ function Cascade(element, options) {
 	}
 
 	Array.prototype.forEach.call(this.children, function(child) {
-		css(child, 'position', 'absolute');
+		css(child, {
+			position: 'absolute',
+			'box-sizing': 'border-box'
+		});
 	});
 
 	this.flow();
@@ -60,21 +61,14 @@ extend(Cascade.prototype, {
 
 			//get the index of the array with minimum height
 			var columnIndex = columnsHeights.indexOf(Math.min.apply(Math, columnsHeights)),
-				paddings = getPaddings(child),
 				margins = getMargins(child),
-				borders = getBorders(child),
+				//TODO: fix when box-sizing is border-box
 				// horizontal and vertical sums of box model properties for the child
 				horizontalSpace = 
-					paddings.left + paddings.right
-					margins.left + margins.right + 
-					borders.left + borders.right,
+					margins.left + margins.right,
 				verticalSpace = 
-					paddings.top + paddings.bottom
-					margins.top + margins.bottom + 
-					borders.top + borders.bottom;
+					margins.top + margins.bottom;
 			
-			console.dir(css);
-
 			css(child, {
 				//width is the column width excluding paddings, margins and borders
 				width: columnWidth - horizontalSpace,

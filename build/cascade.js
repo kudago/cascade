@@ -1,9 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var extend = require('xtend/mutable'),
 	css = require('mucss/css'),
-	getPaddings = require('mucss/paddings'),
-	getMargins = require('mucss/margins'),
-	getBorders = require('mucss/borders');
+	getMargins = require('mucss/margins');
 
 function Cascade(element, options) {
 
@@ -32,7 +30,10 @@ function Cascade(element, options) {
 	}
 
 	Array.prototype.forEach.call(this.children, function(child) {
-		css(child, 'position', 'absolute');
+		css(child, {
+			position: 'absolute',
+			'box-sizing': 'border-box'
+		});
 	});
 
 	this.flow();
@@ -61,21 +62,14 @@ extend(Cascade.prototype, {
 
 			//get the index of the array with minimum height
 			var columnIndex = columnsHeights.indexOf(Math.min.apply(Math, columnsHeights)),
-				paddings = getPaddings(child),
 				margins = getMargins(child),
-				borders = getBorders(child),
+				//TODO: fix when box-sizing is border-box
 				// horizontal and vertical sums of box model properties for the child
 				horizontalSpace = 
-					paddings.left + paddings.right
-					margins.left + margins.right + 
-					borders.left + borders.right,
+					margins.left + margins.right,
 				verticalSpace = 
-					paddings.top + paddings.bottom
-					margins.top + margins.bottom + 
-					borders.top + borders.bottom;
+					margins.top + margins.bottom;
 			
-			console.dir(css);
-
 			css(child, {
 				//width is the column width excluding paddings, margins and borders
 				width: columnWidth - horizontalSpace,
@@ -97,7 +91,7 @@ extend(Cascade.prototype, {
 });
 
 module.exports = Cascade;
-},{"mucss/borders":3,"mucss/css":4,"mucss/margins":6,"mucss/paddings":7,"xtend/mutable":10}],2:[function(require,module,exports){
+},{"mucss/css":3,"mucss/margins":5,"xtend/mutable":8}],2:[function(require,module,exports){
 /** simple rect stub  */
 module.exports = function(l,t,r,b,w,h){
 	this.top=t||0;
@@ -108,27 +102,6 @@ module.exports = function(l,t,r,b,w,h){
 	if (h!==undefined) this.height=h||this.bottom-this.top;
 };
 },{}],3:[function(require,module,exports){
-var Rect = require('./Rect');
-var parse = require('./parse-value');
-
-/**
- * Return border widths of an element
- */
-module.exports = function($el){
-	if ($el === window) return new Rect;
-
-	if (!($el instanceof Element)) throw Error('Argument is not an element');
-
-	var style = window.getComputedStyle($el);
-
-	return new Rect(
-		parse(style.borderLeftWidth),
-		parse(style.borderTopWidth),
-		parse(style.borderRightWidth),
-		parse(style.borderBottomWidth)
-	);
-};
-},{"./Rect":2,"./parse-value":8}],4:[function(require,module,exports){
 var fakeStyle = require('./fake-element').style;
 var prefix = require('./prefix').dom;
 
@@ -182,9 +155,9 @@ function prefixize(name){
 	return '';
 }
 
-},{"./fake-element":5,"./prefix":9}],5:[function(require,module,exports){
+},{"./fake-element":4,"./prefix":7}],4:[function(require,module,exports){
 module.exports = document.createElement('div');
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var parse = require('./parse-value');
 var Rect = require('./Rect');
 
@@ -209,37 +182,13 @@ module.exports = function($el){
 	);
 };
 
-},{"./Rect":2,"./parse-value":8}],7:[function(require,module,exports){
-var Rect = require('./Rect');
-var parse = require('./parse-value');
-
-/**
- * Return paddings of an element.
- *
- * @param    {Element}   $el   An element to calc paddings.
- * @return   {Object}   Paddings object `{top:n, bottom:n, left:n, right:n}`.
- */
-module.exports = function($el){
-	if ($el === window) return new Rect();
-
-	if (!($el instanceof Element)) throw Error('Argument is not an element');
-
-	var style = window.getComputedStyle($el);
-
-	return new Rect(
-		parse(style.paddingLeft),
-		parse(style.paddingTop),
-		parse(style.paddingRight),
-		parse(style.paddingBottom)
-	);
-};
-},{"./Rect":2,"./parse-value":8}],8:[function(require,module,exports){
+},{"./Rect":2,"./parse-value":6}],6:[function(require,module,exports){
 /** Returns parsed css value. */
 module.exports = function (str){
 	str += '';
 	return parseFloat(str.slice(0,-2)) || 0;
 };
-},{}],9:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 //vendor-prefix method, http://davidwalsh.name/vendor-prefix
 var styles = getComputedStyle(document.documentElement, '');
 
@@ -256,7 +205,7 @@ module.exports = {
 	css: '-' + pre + '-',
 	js: pre[0].toUpperCase() + pre.substr(1)
 };
-},{}],10:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports = extend
 
 function extend(target) {
