@@ -1,6 +1,8 @@
 var extend = require('xtend/mutable'),
-	throttle = require('emmy/throttle'),
-	css = require('mucss/css');
+	css = require('mucss/css'),
+	getPaddings = require('mucss/paddings'),
+	getMargins = require('mucss/margins'),
+	getBorders = require('mucss/borders');
 
 function Cascade(element, options) {
 
@@ -9,8 +11,7 @@ function Cascade(element, options) {
 	var defaults = {
 		childrenSelector: null,
 		minWidth: 300,
-		autoResize: true,
-		autoResizeThrottle: 45
+		autoResize: true
 	};
 
 	//apply options
@@ -28,6 +29,7 @@ function Cascade(element, options) {
 	if (getComputedStyle(this.element).position == 'static') {
 		css(this.element, 'position', 'relative');
 	}
+
 	Array.prototype.forEach.call(this.children, function(child) {
 		css(child, 'position', 'absolute');
 	});
@@ -35,7 +37,7 @@ function Cascade(element, options) {
 	this.flow();
 
 	if (this.autoResize) {
-		throttle(window, 'resize', this.flow.bind(this), this.autoResizeThrottle);
+		window.addEventListener('resize', this.flow.bind(this));
 	}
 
 }
@@ -57,11 +59,25 @@ extend(Cascade.prototype, {
 		Array.prototype.forEach.call(self.children, function(child) {
 
 			//get the index of the array with minimum height
-			var columnIndex = columnsHeights.indexOf(Math.min.apply(Math, columnsHeights));
+			var columnIndex = columnsHeights.indexOf(Math.min.apply(Math, columnsHeights)),
+				paddings = getPaddings(child),
+				margins = getMargins(child),
+				borders = getBorders(child),
+				// horizontal and vertical sums of box model properties for the child
+				horizontalSpace = 
+					paddings.left + paddings.right
+					margins.left + margins.right + 
+					borders.left + borders.right,
+				verticalSpace = 
+					paddings.top + paddings.bottom
+					margins.top + margins.bottom + 
+					borders.top + borders.bottom;
+			
+			console.dir(css);
 
 			css(child, {
-				//width is the column width
-				width: columnWidth,
+				//width is the column width excluding paddings, margins and borders
+				width: columnWidth - horizontalSpace,
 				//top is under the bottom element
 				top: columnsHeights[columnIndex],
 				//left is width of column and index production
@@ -69,7 +85,7 @@ extend(Cascade.prototype, {
 			});
 
 			//add current element's height to the column height
-			columnsHeights[columnIndex]+=child.offsetHeight;
+			columnsHeights[columnIndex] += child.clientHeight + verticalSpace;
 
 		});
 
