@@ -6,6 +6,10 @@ Simple minimalistic plugin for masonry-like layout. Lightweight (3kb minified) j
 
 Browserify:
 
+```
+$ npm install cascade-layout
+```
+
 ```js
 var cascade = require('cascade-layout);
 ```
