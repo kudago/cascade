@@ -4,11 +4,7 @@ Simple minimalistic plugin for masonry-like layout. Lightweight (3kb minified) j
 
 ##Usage
 
-Npm installation is not ready but in future it will work like this:
-
-`$ npm install emmy cascade-layout`
-
-Then call
+CommonJS:
 
 ```js
 var cascade = require('cascade-layout);
@@ -42,7 +38,7 @@ When using VanillaJS or CommonJS forms you can call the instance's reflow method
 
 ```js
 var cascadeItem = new Cascade(...);
-button onclick = 
+cascadeItem.reflow() //reposition cascade elements
 
 ```
 
