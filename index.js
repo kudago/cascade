@@ -62,7 +62,6 @@ extend(Cascade.prototype, {
 			//get the index of the array with minimum height
 			var columnIndex = columnsHeights.indexOf(Math.min.apply(Math, columnsHeights)),
 				margins = getMargins(child),
-				//TODO: fix when box-sizing is border-box
 				// horizontal and vertical sums of box model properties for the child
 				horizontalSpace = 
 					margins.left + margins.right,
