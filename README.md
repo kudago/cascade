@@ -17,7 +17,7 @@ var cascade = require('cascade-layout);
 You can also use it with native JS:
 
 ```js
-new Cascade(element, options);
+var cascade = new Cascade(element, options);
 ```
 
 Or with jQuery:
@@ -35,3 +35,16 @@ $(elem).cascade(options);
 	autoResize: true //resize automatically on resize
 }
 ```
+
+##Methods
+
+When using VanillaJS or CommonJS forms you can call the instance's reflow method to make Cascade redraw the elements
+
+```js
+var cascadeItem = new Cascade(...);
+button onclick = 
+
+```
+
+
+

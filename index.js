@@ -35,18 +35,20 @@ function Cascade(element, options) {
 		});
 	});
 
-	this.flow();
+	//set this instance reflow to its prototype reflow bind to 'this' value
+	this.reflow = this.reflow.bind(this);
+
+	this.reflow();
 
 	if (this.autoResize) {
-		//TODO: add throttle
-		window.addEventListener('resize', this.flow.bind(this));
+		window.addEventListener('resize', this.reflow.bind(this));
 	}
 
 }
 
 extend(Cascade.prototype, {
 
-	flow: function() {
+	reflow: function() {
 		var self = this,
 			elementWidth = self.element.offsetWidth,
 			columnsNumber = Math.floor(elementWidth/self.minWidth),
@@ -96,11 +98,12 @@ if (window.jQuery) {
 			$(this).each(function() {
 				new Cascade(this, options);
 			});
+			return this;
 		};
 	}(window.jQuery));
 }
 
-if (module && module.exports) { //CommonJS support
+if (module.parent) { //CommonJS support
 	module.exports = Cascade;
 } else { //VanillaJS support
 	window.Cascade = Cascade;

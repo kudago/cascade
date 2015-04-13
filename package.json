@@ -4,7 +4,7 @@
   "description": "Simple and lightweight plugin to flow blocks like masonry. The plugin is kudago/waterfall successor",
   "main": "index.js",
   "scripts": {
-    "build": "browserify index.js > build/cascade.js ; browserify ./demo/demo.js > ./demo/demo-build.js; npm run min",
+    "build": "browserify index.js > build/cascade.js ; npm run min",
     "min": "ccjs build/cascade.js > build/cascade.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
