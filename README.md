@@ -1,8 +1,8 @@
-#Cascade.js
+# Cascade.js
 
 Simple minimalistic plugin for masonry-like layout. Lightweight (3kb minified) jQuery-free library, a successor of [kudago/waterfall.js](https://github.com/kudago/waterfall).
 
-##Usage
+## Usage
 
 Browserify:
 
@@ -26,7 +26,7 @@ Or with jQuery:
 $(elem).cascade(options);
 ```
 
-##Options
+## Options
 
 ```js
 {
@@ -36,7 +36,7 @@ $(elem).cascade(options);
 }
 ```
 
-##Methods
+## Methods
 
 When using VanillaJS or CommonJS forms you can call the instance's reflow method to make Cascade redraw the elements
 
