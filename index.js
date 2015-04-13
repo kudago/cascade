@@ -38,6 +38,7 @@ function Cascade(element, options) {
 	this.flow();
 
 	if (this.autoResize) {
+		//TODO: add throttle
 		window.addEventListener('resize', this.flow.bind(this));
 	}
 
@@ -88,4 +89,19 @@ extend(Cascade.prototype, {
 
 });
 
-module.exports = Cascade;
+//jQuery support
+if (window.jQuery) {
+	(function($) {
+		$.fn.cascade = function(options) {
+			$(this).each(function() {
+				new Cascade(this, options);
+			});
+		};
+	}(window.jQuery));
+}
+
+if (module && module.exports) { //CommonJS support
+	module.exports = Cascade;
+} else { //VanillaJS support
+	window.Cascade = Cascade;
+}

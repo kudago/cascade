@@ -45,6 +45,7 @@ function Cascade(element, options) {
 	this.flow();
 
 	if (this.autoResize) {
+		//TODO: add throttle
 		window.addEventListener('resize', this.flow.bind(this));
 	}
 
@@ -69,7 +70,6 @@ extend(Cascade.prototype, {
 			//get the index of the array with minimum height
 			var columnIndex = columnsHeights.indexOf(Math.min.apply(Math, columnsHeights)),
 				margins = getMargins(child),
-				//TODO: fix when box-sizing is border-box
 				// horizontal and vertical sums of box model properties for the child
 				horizontalSpace = 
 					margins.left + margins.right,
@@ -96,7 +96,22 @@ extend(Cascade.prototype, {
 
 });
 
-module.exports = Cascade;
+//jQuery support
+if (window.jQuery) {
+	(function($) {
+		$.fn.cascade = function(options) {
+			$(this).each(function() {
+				new Cascade(this, options);
+			});
+		};
+	}(window.jQuery));
+}
+
+if (module && module.exports) { //CommonJS support
+	module.exports = Cascade;
+} else { //VanillaJS support
+	window.Cascade = Cascade;
+}
 },{"mucss/css":4,"mucss/margins":6,"xtend/mutable":9}],3:[function(require,module,exports){
 /** simple rect stub  */
 module.exports = function(l,t,r,b,w,h){
