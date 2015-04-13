@@ -4,7 +4,7 @@ Simple minimalistic plugin for masonry-like layout. Lightweight (3kb minified) j
 
 ##Usage
 
-CommonJS:
+Browserify:
 
 ```js
 var cascade = require('cascade-layout);

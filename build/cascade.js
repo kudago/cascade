@@ -104,7 +104,7 @@ if (window.jQuery) {
 	}(window.jQuery));
 }
 
-if (module.parent) { //CommonJS support
+if (exports) { //Browserify support
 	module.exports = Cascade;
 } else { //VanillaJS support
 	window.Cascade = Cascade;
