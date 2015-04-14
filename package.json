@@ -1,6 +1,6 @@
 {
   "name": "cascade-layout",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple and lightweight plugin to flow blocks like masonry. The plugin is kudago/waterfall successor",
   "main": "index.js",
   "scripts": {
@@ -16,5 +16,9 @@
     "mucss": "^0.5.9",
     "queried": "^1.4.1",
     "xtend": "^4.0.0"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git@github.com:kudago/cascade.git"
   }
 }
