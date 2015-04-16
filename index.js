@@ -103,8 +103,4 @@ if (window.jQuery) {
 	}(window.jQuery));
 }
 
-if (exports) { //Browserify support
-	module.exports = Cascade;
-} else { //VanillaJS support
-	window.Cascade = Cascade;
-}
+module.exports = Cascade;

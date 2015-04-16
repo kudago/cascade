@@ -1,10 +1,10 @@
 {
   "name": "cascade-layout",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple and lightweight plugin to flow blocks like masonry. The plugin is kudago/waterfall successor",
   "main": "index.js",
   "scripts": {
-    "build": "browserify index.js > build/cascade.js ; npm run min",
+    "build": "browserify index.js -s cascade > build/cascade.js ; npm run min",
     "min": "ccjs build/cascade.js > build/cascade.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

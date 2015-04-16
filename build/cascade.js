@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.cascade = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var extend = require('xtend/mutable'),
 	css = require('mucss/css'),
 	getMargins = require('mucss/margins');
@@ -104,11 +104,7 @@ if (window.jQuery) {
 	}(window.jQuery));
 }
 
-if (exports) { //Browserify support
-	module.exports = Cascade;
-} else { //VanillaJS support
-	window.Cascade = Cascade;
-}
+module.exports = Cascade;
 },{"mucss/css":3,"mucss/margins":5,"xtend/mutable":8}],2:[function(require,module,exports){
 /** simple rect stub  */
 module.exports = function(l,t,r,b,w,h){
@@ -240,4 +236,5 @@ function extend(target) {
     return target
 }
 
-},{}]},{},[1]);
+},{}]},{},[1])(1)
+});
