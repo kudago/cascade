@@ -2,6 +2,8 @@
 
 Simple minimalistic plugin for masonry-like layout. Lightweight (3kb minified) jQuery-free library, a successor of [kudago/waterfall.js](https://github.com/kudago/waterfall).
 
+[Demo](https://kudago.github.io/cascade)
+
 ## Usage
 
 Browserify:
