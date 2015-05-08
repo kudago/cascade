@@ -3,6 +3,12 @@ var extend = require('xtend/mutable'),
 	css = require('mucss/css'),
 	getMargins = require('mucss/margins');
 
+/**
+ * Cascade instance constructor
+ * @param {DOMObject} element - cascade container
+ * @param {Object} options - initialization options
+ * @constructor
+ */
 function Cascade(element, options) {
 
 	if (!(this instanceof Cascade)) return new Cascade(element, options);
@@ -49,6 +55,11 @@ function Cascade(element, options) {
 
 extend(Cascade.prototype, {
 
+	/**
+	 * Reposition elements according to they sizes and positions
+	 * Can be called e.g. after adding a new elemenet
+	 * @return {Void}
+	 */
 	reflow: function() {
 		var self = this,
 			elementWidth = self.element.offsetWidth,
