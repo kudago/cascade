@@ -10,7 +10,7 @@
   },
   "author": "Yura Trambitskiy",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "ccjs": "^0.2.0",
     "emmy": "^5.2.0",
     "mucss": "^0.5.9",
