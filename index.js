@@ -63,7 +63,7 @@ extend(Cascade.prototype, {
 		var self = this,
 			elementWidth = self.element.offsetWidth,
 			columnsNumber = Math.floor(elementWidth/self.minWidth),
-			columnWidth = elementWidth / columnsNumber,
+			columnWidth = Math.floor(elementWidth / columnsNumber),
 			//create array with zeros to monitor columns current height
 			columnsHeights = [];
 
