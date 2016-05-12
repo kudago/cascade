@@ -13,7 +13,7 @@ $ npm install cascade-layout
 ```
 
 ```js
-var cascade = require('cascade-layout);
+var cascade = require('cascade-layout');
 ```
 
 You can also use it with native JS:
