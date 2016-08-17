@@ -34,13 +34,6 @@ function Cascade(element, options) {
 		css(this.element, 'position', 'relative');
 	}
 
-	Array.prototype.forEach.call(this.children, function(child) {
-		css(child, {
-			position: 'absolute',
-			'box-sizing': 'border-box'
-		});
-	});
-
 	//set this instance reflow to its prototype reflow bind to 'this' value
 	this.reflow = this.reflow.bind(this);
 
@@ -77,12 +70,14 @@ extend(Cascade.prototype, {
 			var columnIndex = columnsHeights.indexOf(Math.min.apply(Math, columnsHeights)),
 				margins = getMargins(child),
 				// horizontal and vertical sums of box model properties for the child
-				horizontalSpace = 
+				horizontalSpace =
 					margins.left + margins.right,
-				verticalSpace = 
+				verticalSpace =
 					margins.top + margins.bottom;
-			
+
 			css(child, {
+				position: 'absolute',
+				'box-sizing': 'border-box',
 				//width is the column width excluding paddings, margins and borders
 				width: columnWidth - horizontalSpace,
 				//top is under the bottom element
