@@ -80,6 +80,8 @@ extend(Cascade.prototype, {
 				'box-sizing': 'border-box',
 				//width is the column width excluding paddings, margins and borders
 				width: columnWidth - horizontalSpace,
+				//if min-width is set on the element it can break cascade items layout
+				'min-width': 0,
 				//top is under the bottom element
 				top: columnsHeights[columnIndex],
 				//left is width of column and index production
